@@ -1,44 +1,55 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./scss/style.scss";
+import todosArray from "./todosArray"
+import Header from "./components/Header";
+import Todo from "./components/Todo";
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this)
     }
-  render() {
-    return (
-      <main>
-          <header>
-              <h1>{this.props.title}</h1>
-          </header>
-          <section className="todo-list">
-              <div className="todo completed">
-                  <button className="checkbox icon">
-                      <i className="material-icons">check_box</i>
-                  </button>
-                  <span className="todo-title">
-                        Изучить JavaScript с Николаем
-                  </span>
-                  <button className="delete icon">
-                      <i className="material-icons">delete</i>
-                  </button>
-              </div>
-              <div className="todo">
-                  <button className="checkbox icon">
-                      <i className="material-icons">check_box_outline_blank</i>
-                  </button>
-                  <span className="todo-title">
-                        Изучить реакт
-                  </span>
-                  <button className="delete icon">
-                      <i className="material-icons">delete</i>
-                  </button>
-              </div>
 
-          </section>
-      </main>
-    );
-  }
+    handleStatusChange(id) {
+        todosArray.map(todo => {
+            if (todo.id === id) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+
+        this.setState({todosArray});
+    }
+
+    handleDelete(id) {
+        console.log(id);
+        todosArray.filter(todo => todo.id !== id);
+        this.setState({todosArray});
+        console.log(todosArray)
+    }
+
+    render() {
+        return (
+            <main>
+                <Header title={this.props.title}/>
+                <section className="todo-list">
+                    {
+                        todosArray.map(todo =>
+                            < Todo
+                                key={todo.id}
+                                id={todo.id}
+                                title={todo.title}
+                                completed={todo.completed}
+                                onStatusChange={this.handleStatusChange}
+                                onDelete={this.handleDelete}
+                            />
+                        )
+                    }
+                </section>
+            </main>
+        );
+    }
 }
 
 export default App;
