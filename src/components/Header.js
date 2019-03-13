@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import Stats from "./Stats"
+import Stats from "./Stats";
+
 class Header extends Component {
     render() {
         return (

@@ -7,7 +7,6 @@ class Form extends Component {
         this.state = {title: ""};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-
     }
 
     handleSubmit(event) {
@@ -15,7 +14,7 @@ class Form extends Component {
         let title = this.state.title;
         if (title) {
             this.props.onAdd(title);
-            this.setState({title: ''})
+            this.setState({title: ""});
         }
     }
 

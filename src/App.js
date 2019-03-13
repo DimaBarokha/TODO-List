@@ -1,9 +1,10 @@
 import React, {Component} from "react";
-import "./scss/style.scss";
 import todosArray from "./todosArray";
 import Header from "./components/Header";
 import Todo from "./components/Todo";
 import Form from "./components/Form";
+import LoadingScreen from 'react-loading-screen';
+import "./scss/style.scss";
 
 class App extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class App extends Component {
         this.handleStatusChange = this.handleStatusChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleStatusChange(id) {
@@ -47,6 +49,16 @@ class App extends Component {
         this.setState({items: todos});
     }
 
+    handleEdit(id, title) {
+        let todos = this.state.items.map(todo => {
+            if (todo.id === id) {
+                todo.title = title;
+            }
+            return todo;
+        });
+        this.setState({items: todos});
+    }
+
     render() {
         return (
             <main>
@@ -60,6 +72,7 @@ class App extends Component {
                             completed={todo.completed}
                             onStatusChange={this.handleStatusChange}
                             onDelete={this.handleDelete}
+                            onEdit={this.handleEdit}
                         />
                     ))}
                 </section>
