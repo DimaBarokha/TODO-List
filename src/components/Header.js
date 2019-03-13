@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-
+import React, {Component} from "react";
+import Stats from "./Stats"
 class Header extends Component {
-    render(){
+    render() {
         return (
             <header>
+                <Stats todos={this.props.todos}/>
                 <h1>{this.props.title}</h1>
             </header>
         );
