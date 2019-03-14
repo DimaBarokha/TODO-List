@@ -3,7 +3,6 @@ import todosArray from "./todosArray";
 import Header from "./components/Header";
 import Todo from "./components/Todo";
 import Form from "./components/Form";
-import LoadingScreen from 'react-loading-screen';
 import "./scss/style.scss";
 
 class App extends Component {
@@ -35,6 +34,7 @@ class App extends Component {
 
     nextId() {
         this._nextId = this._nextId || 4;
+
         return this._nextId++;
     }
 
